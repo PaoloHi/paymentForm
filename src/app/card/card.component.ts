@@ -1,4 +1,6 @@
 import { Component, inject } from '@angular/core';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
 
 import { CardService } from '../card.service';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
@@ -6,11 +8,13 @@ import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule,FontAwesomeModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
 export class CardComponent {
+
+ 
 
   cardService = inject(CardService)
 
