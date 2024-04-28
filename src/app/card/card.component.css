@@ -1,6 +1,6 @@
 
 
-:root {
+:host {
   --primary-light: #8e8aff;
   --primary: #655dff;
   --primary-dark: #4f46f8;
@@ -11,6 +11,24 @@
   --greyDark-1: #92acc4;
   --greyDark-2: #5a768f;
 }
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+html {
+  box-sizing: border-box;
+  font-size: 62.5%;
+  overflow-y: scroll;
+  background: var(--greyLight-1);
+  font-family: "Nunito", sans-serif;
+  letter-spacing: 0.03rem;
+}
+
 
 body {
     font-family: "Overpass Mono", monospace;
@@ -251,25 +269,6 @@ body {
 
 
 
-
-  
-  *,
-  *::before,
-  *::after {
-    margin: 0;
-    padding: 0;
-    box-sizing: inherit;
-  }
-  
-  html {
-    box-sizing: border-box;
-    font-size: 62.5%;
-    overflow-y: scroll;
-    background: var(--greyLight-1);
-    font-family: "Nunito", sans-serif;
-    letter-spacing: 0.03rem;
-  }
-  
   .container {
     min-height: 100vh;
     display: flex;
