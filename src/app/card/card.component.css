@@ -12,14 +12,6 @@
   --greyDark-2: #5a768f;
 }
 
-*,
-*::before,
-*::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: inherit;
-}
-
 html {
   box-sizing: border-box;
   font-size: 62.5%;
@@ -359,7 +351,7 @@ body {
   }
   .card__expiry p {
     font-size: 1.4rem;
-  }*/
+  }
   
   .form {
     grid-column: 2/3;
@@ -500,3 +492,9 @@ body {
     bottom: 20px;
     color: #ea4c89;
   }
+  
+  */
+
+
+
+  

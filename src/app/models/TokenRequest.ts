@@ -1,10 +1,10 @@
 import { Card } from "./card";
 import { Customer } from "./customer";
 
-export class  TokenRequest {
-    ip:string ;
-    card : Card;
-    customer: Customer;
+export interface  TokenRequest {
+    ip?:string ;
+    card? : Card;
+    customer?: Customer;
 }
 
 

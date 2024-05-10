@@ -1,8 +1,10 @@
 
 
-<div class="container">
-  <div class="payment">
-    <div class="card" >
+<div >
+  <div class="flex flex-row place-content-around ">
+   
+    <div class="backdrop-blur-sm  bg-[white]/40 animate-wiggle">
+      <div class="card self-center " >
         <div class="card-inner">
           <div class="card-front">
             <div class="card-bg"></div>
@@ -37,8 +39,8 @@
             <div class="card-chip"></div>
             <div class="card-holder">{{cardHolderName.value}}</div>
             <div class="card-number">{{card.cardNumber}}</div>
-
-            <div class="card-valid"> /24</div>
+  
+            <div class="card-valid">{{ card.expirationMonth  }} /{{card.expirationYear}}</div>
           </div>
           <div class="card-back">
             <div class="card-signature">{{card.cardHolderName}}</div>
@@ -46,80 +48,80 @@
           </div>
         </div>
     </div>
-    <form class="form" #cardForm="ngForm" (keyup)="0">
-      <h2>Payment Details</h2>
-      
-      <div class="form__name form__detail">
-        <label for="cardHolderName">Cardholder Name</label>
+    </div>
+   
+  
+    <form class="form self-center " #cardForm="ngForm" (keyup)="0">
+
+      <div class="">
+        <label for="cardHolderName"  class="block text-gray-700 text-sm font-bold mb-2">Cardholder Name</label>
         <input type="text" placeholder="Mrs Lenivier Martinez" maxlength="24"
           id="cardHolderName" name="cardHolderName" [(ngModel)]="card.cardHolderName" #cardHolderName
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
           (ngModelChange)="card.cardHolderName=convertToUpperCase(cardHolderName, $event)" 
         >
-        <div class="alert" id="alert-1">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3163 9.00362C11.8593 10.0175 11.1335 11.25 9.99343 11.25H2.00657C0.866539 11.25 0.140732 10.0175 0.683711 9.00362L4.67714 1.54691C5.24618 0.484362 6.75381 0.484362 7.32286 1.54691L11.3163 9.00362ZM5.06238 4.49805C5.02858 3.95721 5.4581 3.5 6 3.5C6.5419 3.5 6.97142 3.95721 6.93762 4.49805L6.79678 6.75146C6.77049 7.17221 6.42157 7.5 6 7.5C5.57843 7.5 5.22951 7.17221 5.20322 6.75146L5.06238 4.49805ZM6 8C5.44772 8 5 8.44772 5 9C5 9.55229 5.44772 10 6 10C6.55228 10 7 9.55229 7 9C7 8.44772 6.55228 8 6 8Z" fill="#FF6A96"/>
-          </svg>
+        <div *ngIf="!isValidHolderName" class="alert" id="alert-1">
+          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
           Full name required</div>
           </div>
       
-      <div class="form__number form__detail">
-        <label for="cardNumber">Card Number</label>
-          <input inputmode="numeric"  placeholder="0000 0000 0000 0000"   
+      <div class="">
+        <label for="cardNumber"  class="block text-gray-700 text-sm font-bold mb-2"
+        >Card Number</label>
+          <input inputmode="numeric"  placeholder="0000 0000 0000 0000"
+          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
         id="cardNumber" name="cardNumber" [(ngModel)]="card.cardNumber"  #cardNumber="ngModel"
         >
 
-        <div class="alert" id="alert-2">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3163 9.00362C11.8593 10.0175 11.1335 11.25 9.99343 11.25H2.00657C0.866539 11.25 0.140732 10.0175 0.683711 9.00362L4.67714 1.54691C5.24618 0.484362 6.75381 0.484362 7.32286 1.54691L11.3163 9.00362ZM5.06238 4.49805C5.02858 3.95721 5.4581 3.5 6 3.5C6.5419 3.5 6.97142 3.95721 6.93762 4.49805L6.79678 6.75146C6.77049 7.17221 6.42157 7.5 6 7.5C5.57843 7.5 5.22951 7.17221 5.20322 6.75146L5.06238 4.49805ZM6 8C5.44772 8 5 8.44772 5 9C5 9.55229 5.44772 10 6 10C6.55228 10 7 9.55229 7 9C7 8.44772 6.55228 8 6 8Z" fill="#FF6A96"/>
-          </svg>
+        <div *ngIf="!isValidCardNumber" class="alert" id="alert-2">
+          <fa-icon [icon]="faTriangleExclamation"></fa-icon>
           Invalid card number</div>
-          </div>
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.5.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M575.8 255.5c0 18-15 32.1-32 32.1h-32l.7 160.2c0 2.7-.2 5.4-.5 8.1V472c0 22.1-17.9 40-40 40H456c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1H416 392c-22.1 0-40-17.9-40-40V448 384c0-17.7-14.3-32-32-32H256c-17.7 0-32 14.3-32 32v64 24c0 22.1-17.9 40-40 40H160 128.1c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2H104c-22.1 0-40-17.9-40-40V360c0-.9 0-1.9 .1-2.8V287.6H32c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg>
-      
-      <div class="form__expiry form__detail">
-        <label for="date">Exp Date</label>
-         
-          <select [(ngModel)]="card.expirationMonth" name="expirationMonth" id="expirationMonth" #expirationMonth>
-            <option disabled >month</option>
-            <ng-container *ngFor="let month of expMonthOpitons">
-                <option [ngValue]="month">{{month}}</option>
-            </ng-container>
-          </select>
- 
-          <select [(ngModel)]="card.expirationYear" name="expirationYear" id="expirationYear" #expirationYear>
-            <option disabled >year</option>
-            <ng-container *ngFor="let year of expYearOpitons">
-                <option [ngValue]="year">{{year}}</option>
-            </ng-container>
-          </select>
-
-          <div class="alert" id="alert-3">
-            <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3163 9.00362C11.8593 10.0175 11.1335 11.25 9.99343 11.25H2.00657C0.866539 11.25 0.140732 10.0175 0.683711 9.00362L4.67714 1.54691C5.24618 0.484362 6.75381 0.484362 7.32286 1.54691L11.3163 9.00362ZM5.06238 4.49805C5.02858 3.95721 5.4581 3.5 6 3.5C6.5419 3.5 6.97142 3.95721 6.93762 4.49805L6.79678 6.75146C6.77049 7.17221 6.42157 7.5 6 7.5C5.57843 7.5 5.22951 7.17221 5.20322 6.75146L5.06238 4.49805ZM6 8C5.44772 8 5 8.44772 5 9C5 9.55229 5.44772 10 6 10C6.55228 10 7 9.55229 7 9C7 8.44772 6.55228 8 6 8Z" fill="#FF6A96"/>
-            </svg>
-            Invalid date
-          
-          </div>
         </div>
+
       
-      <div class="form__cvv form__detail">
-        <label for="cvv">CVV</label>
-        <input type="password" placeholder="0000" maxlength="4" numbersOnly  
-        id="cvv" name="cvv" [(ngModel)]="card.cvv" #cvv="ngModel">
-        <div class="alert" id="alert-4">
-          <svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg">
-            <path fill-rule="evenodd" clip-rule="evenodd" d="M11.3163 9.00362C11.8593 10.0175 11.1335 11.25 9.99343 11.25H2.00657C0.866539 11.25 0.140732 10.0175 0.683711 9.00362L4.67714 1.54691C5.24618 0.484362 6.75381 0.484362 7.32286 1.54691L11.3163 9.00362ZM5.06238 4.49805C5.02858 3.95721 5.4581 3.5 6 3.5C6.5419 3.5 6.97142 3.95721 6.93762 4.49805L6.79678 6.75146C6.77049 7.17221 6.42157 7.5 6 7.5C5.57843 7.5 5.22951 7.17221 5.20322 6.75146L5.06238 4.49805ZM6 8C5.44772 8 5 8.44772 5 9C5 9.55229 5.44772 10 6 10C6.55228 10 7 9.55229 7 9C7 8.44772 6.55228 8 6 8Z" fill="#FF6A96"/>
-          </svg>
-          Invalid CVV</div>
+      <div class="flex flex-row">
+          <div class="flex flex-col">
+            <label for="date">Fecha de expiracion </label>
+            <div class="flex flex-row ">
+              <select [(ngModel)]="card.expirationMonth" name="expirationMonth" id="expirationMonth"   class="block text-gray-700 text-sm font-bold mb-2 border-4">
+                <option disabled >mes</option>
+                <ng-container *ngFor="let month of expMonthOpitons">
+                    <option [ngValue]="month">{{month}}</option>
+                </ng-container>
+              </select>
+     
+              <select [(ngModel)]="card.expirationYear" name="expirationYear" id="expirationYear"  class="block text-gray-700 text-sm font-bold mb-2 border-4">
+                <option disabled >year</option>
+                <ng-container *ngFor="let year of expYearOpitons">
+                    <option [ngValue]="(year).toString().slice(-2)">{{year}}</option>
+                </ng-container>
+              </select>  
+            </div>
+            
+            <div *ngIf="!isValidExpiration" class="alert" id="alert-3">
+              <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+              Invalid date
+            </div>
           </div>
+
+          
+
+          <div class="">
+            <label for="cvv"  class="block text-gray-700 text-sm font-bold mb-2">CVV</label>
+            <input type="password" placeholder="0000" maxlength="4" numbersOnly  
+            id="cvv" name="cvv" [(ngModel)]="card.cvv" #cvv="ngModel">
+            <div *ngIf="!isValidCvv" class="alert" id="alert-4">
+              <fa-icon [icon]="faTriangleExclamation"></fa-icon>
+              Invalid CVV</div>
+          </div>
+      </div>
       
-       
-      
-      <button type="submit" class="form__btn">Confirm</button>
-        
+   
+
+            
       <button (click)="sendCardToParent(card)">Add to parent's list</button>\
 
-    </form>    
+    </form>     
   </div>
 </div>
 

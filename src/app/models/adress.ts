@@ -6,5 +6,5 @@ export class Adress {
     street: string; 
     street2: string;
     district: string;
-    zipcode : string;
+    postalCode : string;
 }

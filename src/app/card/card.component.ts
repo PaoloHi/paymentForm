@@ -1,5 +1,7 @@
 import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { faCoffee, faCreditCard, faHouse, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+
 
 import {FormsModule} from '@angular/forms';
 import {NgModule} from '@angular/core';
@@ -8,27 +10,38 @@ import { TokenRequest } from '../models/TokenRequest';
 import { Card } from '../models/card';
 import { Customer } from '../models/customer';
 
-import { CommonModule, NgFor, UpperCasePipe } from '@angular/common';
+import { CommonModule, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 
-import { CardService } from '../card.service';
+
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { Adress } from '../models/adress';
 import { NumbersValidatorsDirective } from '../validators/numbers-validators.directive';
 import { NgxCleaveDirectiveModule } from 'ngx-cleave-directive';
 
 import { Output, EventEmitter } from '@angular/core';
+
+
 @Component({
   selector: 'app-card',
   standalone: true,
   imports: [ReactiveFormsModule,FontAwesomeModule, FormsModule
     ,CommonModule,NgFor, NumbersValidatorsDirective,
+    NgIf,
     NgxCleaveDirectiveModule],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
 export class CardComponent {
+  //icons 
 
-  cardService = inject(CardService)
+  faCoffee = faCoffee;
+  faHouse = faHouse;
+  faCard = faCreditCard;
+  faTriangleExclamation = faTriangleExclamation
+
+
+
+
   @Output() cardOutput  = new EventEmitter<Card>();
 
 
@@ -56,15 +69,23 @@ export class CardComponent {
       street: '',
       city: '',
       state: '',
-      zipcode: ''
+      postalCode: ''
     }
   };
   ip : String =  "";
 
 
+  isValidExpiration = true;
+  isValidHolderName = true;
+  isValidCardNumber = true; 
+  isValidCvv = true; 
+
+
+
   public convertToUpperCase(input: HTMLInputElement, val: string) {
     const start = input.selectionStart;
     const end = input.selectionEnd;
+    
     setTimeout(() => {
       input.setSelectionRange(start, end);
     });
@@ -80,7 +101,7 @@ export class CardComponent {
   expYearOpitons : Array<number>;
   
   constructor(){
-    this.expYearOpitons = [0,1,2,3,4].map((x)=> x +this.actualYear);
+    this.expYearOpitons = [0,1,2,3,4,5].map((x)=> x +this.actualYear);
   }
 
 
