@@ -16,7 +16,7 @@ export class CustomerComponent {
 
   public sendCustomerToParent ( value: Customer){
       this.customerOutput.emit(value)
-  }
+   }
 
   
 
