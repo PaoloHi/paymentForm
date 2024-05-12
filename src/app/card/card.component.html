@@ -1,11 +1,14 @@
 
 
-<div >
-  <div class="flex flex-row place-content-around ">
-   
-    <div class="backdrop-blur-sm  bg-[white]/40 animate-wiggle">
+<div class=" flex flex-col" >
+  <h1 class="font-bold text-orange-50 block f"> Datos de la Tarjeta</h1>
+
+  <div class=" grid grid-cols-2 place-items-center ">
+    
+    <!----
+    <div class="backdrop-blur-sm  bg-[white]/40 ">
       <div class="card self-center " >
-        <div class="card-inner">
+        <div class="card-inner" >
           <div class="card-front">
             <div class="card-bg"></div>
             <div class="card-glow"></div>
@@ -37,6 +40,7 @@
               </svg>
             </div>
             <div class="card-chip"></div>
+
             <div class="card-holder">{{cardHolderName.value}}</div>
             <div class="card-number">{{card.cardNumber}}</div>
   
@@ -49,29 +53,70 @@
         </div>
     </div>
     </div>
-   
-  
-    <form class="form self-center " #cardForm="ngForm" (keyup)="0">
 
+  -->
+    <div>
+      <div 
+      class=" grid grid-cols-2  text-white grid-rows-3 card bg-gradient-to-t  from-indigo-500 via-purple-500 to-blue-400 rounded-xl p-6 self-center items-center">
+        <div class="">
+          <!--
+          <svg class="visa" enable-background="new 0 0 291.764 291.764" version="1.1" viewbox="5 70 290 200" xml:space="preserve" xmlns="http://www.w3.org/2000/svg">
+            <path class="svgcolor" d="m119.26 100.23l-14.643 91.122h23.405l14.634-91.122h-23.396zm70.598 37.118c-8.179-4.039-13.193-6.765-13.193-10.896 0.1-3.756 4.24-7.604 13.485-7.604 7.604-0.191 13.193 1.596 17.433 3.374l2.124 0.948 3.182-19.065c-4.623-1.787-11.953-3.756-21.007-3.756-23.113 0-39.388 12.017-39.489 29.204-0.191 12.683 11.652 19.721 20.515 23.943 9.054 4.331 12.136 7.139 12.136 10.987-0.1 5.908-7.321 8.634-14.059 8.634-9.336 0-14.351-1.404-21.964-4.696l-3.082-1.404-3.273 19.813c5.498 2.444 15.609 4.595 26.104 4.705 24.563 0 40.546-11.835 40.747-30.152 0.08-10.048-6.165-17.744-19.659-24.035zm83.034-36.836h-18.108c-5.58 0-9.82 1.605-12.236 7.331l-34.766 83.509h24.563l6.765-18.08h27.481l3.51 18.153h21.664l-18.873-90.913zm-26.97 54.514c0.474 0.046 9.428-29.514 9.428-29.514l7.13 29.514h-16.558zm-160.86-54.796l-22.931 61.909-2.498-12.209c-4.24-14.087-17.533-29.395-32.368-36.999l20.998 78.33h24.764l36.799-91.021h-24.764v-0.01z" fill="#FFFFFF"></path>
+            <path class="svgtipcolor" d="m51.916 111.98c-1.787-6.948-7.486-11.634-15.226-11.734h-36.316l-0.374 1.686c28.329 6.984 52.107 28.474 59.821 48.688l-7.905-38.64z" fill="#FFFFFF"></path>
+            </svg>
+        -->  
+      </div>
+        <div   *ngIf="card.cardNumber.length > 0"class=" row-start-2  font-mono  text-xl ">{{card.cardNumber}}</div>
+        <div  *ngIf="card.cardNumber.length ==0" class="row-start-2  col-span-2 font-mono  text-xl" >0000&nbsp;0000&nbsp;0000&nbsp;0000</div>
+        <div class=" row-start-3">
+          <h3 class="text-sm font-extralight">Card Holder</h3>
+          <p *ngIf="!(card.cardHolderName.length > 0)" id="card-name" class="font-medium">Lenivier Martinez</p>
+          <p *ngIf="card.cardHolderName.length > 0" id="card-name" class="font-medium">{{card.cardHolderName}}</p>
+          </div>
+        
+        <div class=" row-start-3  flex  flex-col justify-self-end  items-end">
+          <h3 class="text-sm font-extralight">Valid Thru</h3>
+          <p class="font-medium">
+            <span id="" *ngIf="!(card.expirationMonth.length > 0)">MM</span>
+            <span id="month">{{card.expirationMonth}}</span>
+            /<span id="" *ngIf="!(card.expirationYear.length > 0)">YY</span>
+            <span id="year">{{card.expirationYear}}</span>
+  
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <form class="form self-center ps-16  pe-20" #cardForm="ngForm" (keyup)="0">
       <div class="">
-        <label for="cardHolderName"  class="block text-gray-700 text-sm font-bold mb-2">Cardholder Name</label>
-        <input type="text" placeholder="Mrs Lenivier Martinez" maxlength="24"
-          id="cardHolderName" name="cardHolderName" [(ngModel)]="card.cardHolderName" #cardHolderName
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-          (ngModelChange)="card.cardHolderName=convertToUpperCase(cardHolderName, $event)" 
-        >
+        <label for="cardHolderName"  class="leading-none pointer-events-none pb-4  text-orange-50 ">Cardholder Name</label>
+        <div class="relative">
+          <input type="text" placeholder="Mrs Lenivier Martinez" maxlength="24"
+            id="cardHolderName" name="cardHolderName" [(ngModel)]="card.cardHolderName" #cardHolderName
+            class="py-4 ps-8 pe-4 rounded-lg  hover:border border-orange-50   bg-orange-97"  
+            (ngModelChange)="card.cardHolderName=convertToUpperCase(cardHolderName, $event)" 
+          >
+          <fa-icon class="text-orange-50 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" 
+          [icon]="faUser"></fa-icon>
+
+        </div>
+       
         <div *ngIf="!isValidHolderName" class="alert" id="alert-1">
           <fa-icon [icon]="faTriangleExclamation"></fa-icon>
           Full name required</div>
           </div>
       
       <div class="">
-        <label for="cardNumber"  class="block text-gray-700 text-sm font-bold mb-2"
+        <label for="cardNumber"  class="leading-none pointer-events-none pb-4  text-orange-50 " 
         >Card Number</label>
+        <div class="relative">
           <input inputmode="numeric"  placeholder="0000 0000 0000 0000"
-          class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
-        id="cardNumber" name="cardNumber" [(ngModel)]="card.cardNumber"  #cardNumber="ngModel"
-        >
+          class="py-4 ps-8 pe-4 rounded-lg  hover:border border-orange   bg-orange-97"  credit-card
+          id="cardNumber" name="cardNumber" [(ngModel)]="card.cardNumber"  #cardNumber="ngModel">
+        <fa-icon class="text-orange-50 absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"  
+        [icon]="faCard"></fa-icon>
+        </div>
+      
 
         <div *ngIf="!isValidCardNumber" class="alert" id="alert-2">
           <fa-icon [icon]="faTriangleExclamation"></fa-icon>
@@ -79,18 +124,23 @@
         </div>
 
       
-      <div class="flex flex-row">
+      <div class="flex">
           <div class="flex flex-col">
-            <label for="date">Fecha de expiracion </label>
-            <div class="flex flex-row ">
-              <select [(ngModel)]="card.expirationMonth" name="expirationMonth" id="expirationMonth"   class="block text-gray-700 text-sm font-bold mb-2 border-4">
+
+            <label for="date"  class="leading-none pointer-events-none pb-4  text-orange-50 " 
+            >Expiracion </label>
+            <div class="grid grid-cols-2 gap-3 ">
+              <select [(ngModel)]="card.expirationMonth" name="expirationMonth" id="expirationMonth" 
+              aria-placeholder="MM"
+               class="block text-sm font-bold mb-2 py-4 ps-2  rounded-lg  bg-orange-97 ">
                 <option disabled >mes</option>
                 <ng-container *ngFor="let month of expMonthOpitons">
                     <option [ngValue]="month">{{month}}</option>
                 </ng-container>
               </select>
      
-              <select [(ngModel)]="card.expirationYear" name="expirationYear" id="expirationYear"  class="block text-gray-700 text-sm font-bold mb-2 border-4">
+              <select [(ngModel)]="card.expirationYear" name="expirationYear" id="expirationYear"
+              class="block text-gray-700 text-sm font-bold mb-2  py-4 ps-2  rounded-lg  bg-orange-97 "              >
                 <option disabled >year</option>
                 <ng-container *ngFor="let year of expYearOpitons">
                     <option [ngValue]="(year).toString().slice(-2)">{{year}}</option>
@@ -98,30 +148,52 @@
               </select>  
             </div>
             
-            <div *ngIf="!isValidExpiration" class="alert" id="alert-3">
-              <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-              Invalid date
+            <div *ngIf="(actualYearStr == card.expirationYear) && ( +actualMonth >  +card.expirationMonth )" 
+              class="text-red-400 relative " id="alert-3">
+              <fa-icon [icon]="faTriangleExclamation" class="absolute text-red-400"></fa-icon>
+              <p class="ps-8">fecha invalida</p>
             </div>
           </div>
 
           
 
-          <div class="">
-            <label for="cvv"  class="block text-gray-700 text-sm font-bold mb-2">CVV</label>
-            <input type="password" placeholder="0000" maxlength="4" numbersOnly  
-            id="cvv" name="cvv" [(ngModel)]="card.cvv" #cvv="ngModel">
-            <div *ngIf="!isValidCvv" class="alert" id="alert-4">
-              <fa-icon [icon]="faTriangleExclamation"></fa-icon>
-              Invalid CVV</div>
+          <div class="ml-3">
+            <label for="cvv"  class=""  
+            >CVV</label>
+            <div class="relative">
+              <input type="number" placeholder="000" maxlength="3" numbersOnly  
+              id="cvv" name="cvv" [(ngModel)]="card.cvv" #cvv="ngModel">
+              <fa-icon [icon]="falock"></fa-icon>
+
+              <div *ngIf="!isValidCvv" class="alert relative" id="alert-4">
+                <fa-icon class="text-red-400 absolute" [icon]="faTriangleExclamation"></fa-icon>
+                <p class="ps-8 text-red-400" >CVV invalido</p>
+              </div>
+            </div>
           </div>
       </div>
-      
-   
-
-            
-      <button (click)="sendCardToParent(card)">Add to parent's list</button>\
-
+  
     </form>     
+
+
+
+    <button (click)="returnPage()" type="button" 
+    class="text-white bg-blue-50 p-2 justify-self-start w-1/3"
+  >atras</button>
+
+  <button (click)="sendCardToParent(card)" type="button" 
+            class="text-white   bg-blue-50 p-2 justify-self-end w-1/3
+            ">continuar </button>
+        
   </div>
+  <div class="flex place-content-between"> 
+
+  </div>
+  
 </div>
 
+
+
+
+    
+  

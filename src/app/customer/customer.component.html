@@ -1,30 +1,34 @@
 
-<div class="flex ">
+<div class="flex place-content-around">
 
 
 
-    <div class="bg-orange"> 
+    <div class="  self-center"> 
 
-        <img class="object-cover h-48 w-96" src="./assets/virtual_card.png" alt="">
+        <img class="object-cover max-h-96 w-max " src="./assets/symbol.png" alt="">
     </div>
 
     <div class="bg-orange"> 
         <h1>Datos de usuario </h1>
-        <form class="form" #customerForm="ngForm" (keyup)="0">
+        <form class="form items-center" #customerForm="ngForm" (keyup)="0">
             <div>
-                <label for="firstName" class="block text-gray-700 text-sm font-bold mb-2">primer nombre </label> 
-                <input type="text" name="firstName" id="firstName" class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="Mrs. Lenivier Martinez" required maxlength="30"
-                [(ngModel)]="customer.firstName" #firstName
-                >   
+                <label for="firstName" class="">Primer nombre </label> 
+                
+                <div class="relative">
+                    <input type="text" name="firstName" id="firstName" 
+                    placeholder="Mrs. Lenivier Martinez" required maxlength="30"
+                    [(ngModel)]="customer.firstName" #firstName
+                    > 
+                    <fa-icon [icon]="faUser"></fa-icon>
+                </div>
+                 
     
             </div>
             <div>
                 <label for="secondName"
-                class="block text-gray-700 text-sm font-bold mb-2"
-                > segundo nombre </label>
+                 > Segundo nombre </label>
                 <input type="text" name="lastName" id="lastName" 
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline" 
+               
                 placeholder="Martinez" required maxlength="30"
 
                 [(ngModel)]="customer.lastName" #lastName>
@@ -33,64 +37,82 @@
     
             <div>
                 <label for="email"
-                class="block text-gray-700 text-sm font-bold mb-2">Correo electronico</label>
-                <input type="email" name="email" id="email" 
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                placeholder="ejemplo@mail.com" required maxlength="60" 
-                [(ngModel)]="customer.email" #email>
-                
+                class=""
+                >Correo electronico</label>
+                <div class="relative">
+                    <input type="email" name="email" id="email" 
+                    placeholder="ejemplo@mail.com" required maxlength="60" 
+                    [(ngModel)]="customer.email" #email>
+                    <fa-icon [icon]="faEnvelope"></fa-icon>
+                </div>
             </div>
     
             <div>
                 <label for="phone"
-                class="block text-gray-700 text-sm font-bold mb-2"
-                > numero de telefono</label>
-                <input type="tel" name="phone" id="phone" placeholder="81 1072 5675"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                maxlength="10"
-                [(ngModel)]="customer.phone" #phone>
-            </div>
-    
-            <div>
-                <label for="street"
-                class="block text-gray-700 text-sm font-bold mb-2"
-                > Calle </label>
-                <input type="text" name="street" id="street" placeholder="Diego de montemayor"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                [(ngModel)]="customer.address.street" #street>
-            </div>
-    
-    
-            <div class="flex-row">
-                <div >
-                    <label for="city" class="block text-gray-700 text-sm font-bold mb-2">  ciudad</label>
-                    <input type="text" name="city" id="city" placeholder="Monterrey"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                    maxlength="20" required
-                    [(ngModel)]="customer.address.city" #city> 
+                class=""
+                > Numero de telefono</label>
+
+                <div class="relative">
+                    <input type="tel" name="phone" id="phone" placeholder="81 1072 5675"
+                    maxlength="10"
+                    [(ngModel)]="customer.phone" #phone
+                    >
+                    <fa-icon [icon]="faPhone"></fa-icon>
                 </div>
+             
+            </div>
     
+            <div class="grid grid-cols-2 gap-3" >
                 <div>
-                    <label for="postalCode" class="block text-gray-700 text-sm font-bold mb-2">Codigo postal </label>
+                    <label for="street"
+                    class="block"
+                    > Calle </label>
+                    <div class="relative">
+                        <input type="text" name="street" id="street" placeholder="Diego de montemayor"
+                        [(ngModel)]="customer.address.street" #street>
+                        <fa-icon [icon]="faStreet"></fa-icon>
+                    </div>
+            
+                </div>
+        
+        
+                <div class="">
+                    <label for="city" class="block">Ciudad</label>
+                    <div class="relative">
+                        <input type="text" name="city" id="city" placeholder="Monterrey"
+                        maxlength="20" required
+                        [(ngModel)]="customer.address.city" #city> 
+                        <fa-icon [icon]="faCity"></fa-icon>
+                    </div>
+                    
+                </div>
+            </div>
+           
+            <div class=" grid  grid-cols-2 gap-3">
+                <div class="">
+                    <label for="postalCode" class=" block">Codigo postal </label>
                     <input type="text" name="postalCode" id="postalCode" placeholder="029451"
-                    class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                    class=""
                     maxlength="7" required
                     [(ngModel)]="customer.address.postalCode" #postalCode>
     
                 </div>
+                <div class=" ">
+                    <label for="country" class="block" >Pais </label>
+                    <input type="text" name="country" id="country" placeholder="Mexico"
+                    class="shadow focus:outline-none focus:shadow-outline"
+                    maxlength="20" required
+                    [(ngModel)]="customer.address.country" #country
+                    >
+                </div>
+
+                
             </div>
+
+            <button (click)="sendCustomerToParent(customer)" type="button" 
+                class="text-white  block  bg-blue-50 p-4
+                ">continuar </button>
     
-            <div>
-                <label for="country" > pais </label>
-                <input type="text" name="country" id="country" placeholder="Mexico"
-                class="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                maxlength="20" required
-                [(ngModel)]="customer.address.country" #country
-                >
-            </div>
-    
-    
-            <button (click)="sendCustomerToParent(customer)">Add to parent's list</button>\
         </form>
     </div>    
 

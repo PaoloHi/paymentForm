@@ -18,7 +18,7 @@ import { TokenFormService } from '../token-form.service';
 })
 export class FormComponent {
   
-  isFirstPage : boolean = true;  
+  isFirstPage : boolean = false;  
   TokenFormService = inject(TokenFormService);
 
   public changePage(){
@@ -31,9 +31,10 @@ export class FormComponent {
 
  
   }
-  addItem(card: Card) {
+  addCard(card: Card) {
     this.token.card = card;
     console.log(this.token.card);
+    this.submitForm();
   }
 
   addCustomer( customer: Customer){

@@ -1,6 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { faCoffee, faCreditCard, faHouse, faTriangleExclamation } from '@fortawesome/free-solid-svg-icons';
+import { faCalendarDays, faCoffee, faCreditCard, faHouse, faLock, faTriangleExclamation, faUser } from '@fortawesome/free-solid-svg-icons';
 
 
 import {FormsModule} from '@angular/forms';
@@ -19,6 +19,7 @@ import { NumbersValidatorsDirective } from '../validators/numbers-validators.dir
 import { NgxCleaveDirectiveModule } from 'ngx-cleave-directive';
 
 import { Output, EventEmitter } from '@angular/core';
+import { CreditCardDirective } from '../credit-card.directive';
 
 
 @Component({
@@ -26,6 +27,7 @@ import { Output, EventEmitter } from '@angular/core';
   standalone: true,
   imports: [ReactiveFormsModule,FontAwesomeModule, FormsModule
     ,CommonModule,NgFor, NumbersValidatorsDirective,
+    CreditCardDirective,
     NgIf,
     NgxCleaveDirectiveModule],
   templateUrl: './card.component.html',
@@ -38,12 +40,18 @@ export class CardComponent {
   faHouse = faHouse;
   faCard = faCreditCard;
   faTriangleExclamation = faTriangleExclamation
-
-
+  faUser = faUser
+  faCalendarDays = faCalendarDays
+  falock =  faLock
 
 
   @Output() cardOutput  = new EventEmitter<Card>();
+  @Output() backButton =  new EventEmitter<void>();
 
+
+  returnPage (){
+    this.backButton.emit();
+  }
 
   sendCardToParent(value: Card) {
     this.cardOutput.emit(value);
@@ -74,14 +82,17 @@ export class CardComponent {
   };
   ip : String =  "";
 
+  dateObj =  new Date();
+  actualMonth = this.dateObj.getMonth();
+  actualYearNum = this.dateObj.getFullYear() % 2000
+  actualYearStr= (this.actualYearNum).toString();
+
 
   isValidExpiration = true;
   isValidHolderName = true;
   isValidCardNumber = true; 
   isValidCvv = true; 
-
-
-
+  
   public convertToUpperCase(input: HTMLInputElement, val: string) {
     const start = input.selectionStart;
     const end = input.selectionEnd;
@@ -95,13 +106,12 @@ export class CardComponent {
 
   expMonthOpitons : Array<String> = ["01", "02","03","04","05","06","07","08","09","10","11", "12"]
 
-  actualYear = new Date().getFullYear();
-  lastDigitsOfYear = this.actualYear % 2000;
+  lastDigitsOfYear = this.dateObj.getFullYear() % 2000;
 
   expYearOpitons : Array<number>;
   
   constructor(){
-    this.expYearOpitons = [0,1,2,3,4,5].map((x)=> x +this.actualYear);
+    this.expYearOpitons = [0,1,2,3,4,5].map((x)=> x + this.actualYearNum)
   }
 
 
