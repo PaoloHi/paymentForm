@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faCalendarDays, faCoffee, faCreditCard, faHouse, faLock, faTriangleExclamation, faUser } from '@fortawesome/free-solid-svg-icons';
 
@@ -21,7 +21,7 @@ import { NgxCleaveDirectiveModule } from 'ngx-cleave-directive';
 import { Output, EventEmitter } from '@angular/core';
 import { CreditCardDirective } from '../credit-card.directive';
 
-
+declare let Cleave :any
 @Component({
   selector: 'app-card',
   standalone: true,
@@ -33,7 +33,7 @@ import { CreditCardDirective } from '../credit-card.directive';
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
-export class CardComponent {
+export class CardComponent implements OnInit {
   //icons 
 
   faCoffee = faCoffee;
@@ -45,6 +45,7 @@ export class CardComponent {
   falock =  faLock
 
 
+  
   @Output() cardOutput  = new EventEmitter<Card>();
   @Output() backButton =  new EventEmitter<void>();
 
@@ -54,6 +55,7 @@ export class CardComponent {
   }
 
   sendCardToParent(value: Card) {
+    value.cardNumber = value.cardNumber.replace(/\s/g,'');
     this.cardOutput.emit(value);
   }
 
@@ -114,6 +116,12 @@ export class CardComponent {
     this.expYearOpitons = [0,1,2,3,4,5].map((x)=> x + this.actualYearNum)
   }
 
+
+  ngOnInit(): void {
+    new Cleave('.cleave-credit', {
+      creditCard: true
+  });
+  }
 
   applyForm = new FormGroup({
     cardHolderName: new FormControl(''),

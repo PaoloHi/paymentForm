@@ -1,12 +1,14 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Customer } from '../models/customer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { faCity, faEnvelope, faPhone, faStreetView, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PhoneDirective } from '../phone.directive';
-import Cleave from 'cleave.js';
 import { NgxCleaveDirective, NgxCleaveDirectiveModule } from 'ngx-cleave-directive';
+
+
+declare let Cleave: any;
 
 @Component({
   selector: 'app-customer',
@@ -17,9 +19,9 @@ import { NgxCleaveDirective, NgxCleaveDirectiveModule } from 'ngx-cleave-directi
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.css'
 })
-export class CustomerComponent {
+export class CustomerComponent implements OnInit{
 
-  faUser =  faUser
+  faUser =  faUser 
   faEnvelope  = faEnvelope;
   faPhone =  faPhone;
   faStreet = faStreetView;
@@ -33,7 +35,13 @@ export class CustomerComponent {
       this.customerOutput.emit(value)
    }
 
-  
+   ngOnInit(): void {
+    new Cleave('.cleave-phone', {
+      phone: true,
+    });
+
+
+   }
 
   customer : Customer = {
     id : 0,

@@ -91,7 +91,7 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": ["./node_modules/cleave.js/dist/cleave.min.js"]
           }
         }
       }

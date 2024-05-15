@@ -293,3 +293,6 @@ body {
   animation: jump 1s ease-in-out infinite; /* La animación dura 2 segundos, se repite infinitamente */
 }
 
+ input {
+  margin-bottom:20px;
+}

@@ -18,7 +18,7 @@ import { TokenFormService } from '../token-form.service';
 })
 export class FormComponent {
   
-  isFirstPage : boolean = false;  
+  isFirstPage : boolean = true;  
   TokenFormService = inject(TokenFormService);
 
   public changePage(){

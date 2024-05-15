@@ -31,6 +31,10 @@ module.exports = {
           '50%': { transform: 'translateY(-10px)' },
         },
       },
+      backgroundImage: {
+        'blob': "url('./src/assets/blob.svg)",
+      }
+
     },
    
   },

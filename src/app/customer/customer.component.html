@@ -1,27 +1,36 @@
 
 <div class="flex place-content-around">
 
+    
+    <div class=" flex flex-col items-start	"> 
+        <h1 class="self-start  text-2xl font-bold text-orange-50">Datos de usuario </h1>
 
+        <div class=" max-h-96 w-max blob self-center mt-20" >
+                <div class="hand">
 
-    <div class="  self-center"> 
-
-        <img class="object-cover max-h-96 w-max " src="./assets/symbol.png" alt="">
+                <img class="  object-cover max-h-96 w-max transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:-rotate-12 duration-300 " src="./assets/Hand.png" alt="">
+            </div>
+            </div>
     </div>
 
-    <div class="bg-orange"> 
-        <h1>Datos de usuario </h1>
+    <div class="bg-orange flex flex-col"> 
         <form class="form items-center" #customerForm="ngForm" (keyup)="0">
-            <div>
+            <div class="form-group">
                 <label for="firstName" class="">Primer nombre </label> 
-                
                 <div class="relative">
                     <input type="text" name="firstName" id="firstName" 
                     placeholder="Mrs. Lenivier Martinez" required maxlength="30"
-                    [(ngModel)]="customer.firstName" #firstName
+                    [(ngModel)]="customer.firstName" #firstName="ngModel" 
+                    class="form-control"
                     > 
                     <fa-icon [icon]="faUser"></fa-icon>
                 </div>
-                 
+
+                <div
+                *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                class="text-red-700">
+                <div *ngIf="firstName.hasError('required')">El nombre es un campo obligatorio.</div>
+            </div> 
     
             </div>
             <div>
@@ -31,7 +40,13 @@
                
                 placeholder="Martinez" required maxlength="30"
 
-                [(ngModel)]="customer.lastName" #lastName>
+                [(ngModel)]="customer.lastName" #lastName="ngModel">
+
+                <div
+                    *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+                    class="text-red-700">
+                    <div *ngIf="lastName.hasError('required')">El apellido es un campo obligatorio.</div>
+                </div> 
     
             </div>
     
@@ -42,23 +57,36 @@
                 <div class="relative">
                     <input type="email" name="email" id="email" 
                     placeholder="ejemplo@mail.com" required maxlength="60" 
-                    [(ngModel)]="customer.email" #email>
+                    [(ngModel)]="customer.email" #email="ngModel">
                     <fa-icon [icon]="faEnvelope"></fa-icon>
                 </div>
+                <div
+                *ngIf="email.invalid && (email.dirty || email.touched)"
+                class="text-red-700">
+                <div *ngIf="email.hasError('required')">El email es un campo obligatorio.</div>
+            </div> 
             </div>
     
             <div>
                 <label for="phone"
-                class=""
+             
                 > Numero de telefono</label>
 
                 <div class="relative">
-                    <input type="tel" name="phone" id="phone" placeholder="81 1072 5675"
+                    <input type="tel" name="phone" id="phone" placeholder="81 1072 5675" required
                     maxlength="10"
-                    [(ngModel)]="customer.phone" #phone
+                    class="cleave-phone"
+                    [(ngModel)]="customer.phone" #phone="ngModel"
+
                     >
                     <fa-icon [icon]="faPhone"></fa-icon>
                 </div>
+
+                <div
+                    *ngIf="phone.invalid && (phone.dirty || phone.touched)"
+                    class="text-red-700">
+                    <div *ngIf="phone.hasError('required')">El telefono es un campo obligatorio.</div>
+                </div> 
              
             </div>
     
@@ -108,12 +136,16 @@
 
                 
             </div>
-
-            <button (click)="sendCustomerToParent(customer)" type="button" 
-                class="text-white  block  bg-blue-50 p-4
-                ">continuar </button>
-    
         </form>
+
+        <button 
+        (click)="sendCustomerToParent(customer)" type="button" 
+            class="text-white  block  bg-blue-50 p-4"
+            [disabled]="customerForm.invalid"
+            #formButton
+            >continuar </button>
+
+
     </div>    
 
 
