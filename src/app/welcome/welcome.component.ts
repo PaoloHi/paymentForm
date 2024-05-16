@@ -14,11 +14,6 @@ export class WelcomeComponent implements OnInit {
   ngOnInit(): void {
       
 
-  import { Application } from '@splinetool/runtime';
-
-  const canvas = document.getElementById('canvas3d');
-  const app = new Application(canvas);
-  app.load('Loading...');
   }
 
 }
