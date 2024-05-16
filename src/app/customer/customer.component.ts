@@ -5,7 +5,6 @@ import { CommonModule } from '@angular/common';
 import { faCity, faEnvelope, faPhone, faStreetView, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { PhoneDirective } from '../phone.directive';
-import { NgxCleaveDirective, NgxCleaveDirectiveModule } from 'ngx-cleave-directive';
 
 
 declare let Cleave: any;
@@ -14,12 +13,11 @@ declare let Cleave: any;
   selector: 'app-customer',
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule, PhoneDirective,
-    NgxCleaveDirectiveModule,
     FontAwesomeModule,CommonModule],
   templateUrl: './customer.component.html',
   styleUrl: './customer.component.css'
 })
-export class CustomerComponent implements OnInit{
+export class CustomerComponent  {
 
   faUser =  faUser 
   faEnvelope  = faEnvelope;
@@ -35,13 +33,6 @@ export class CustomerComponent implements OnInit{
       this.customerOutput.emit(value)
    }
 
-   ngOnInit(): void {
-    new Cleave('.cleave-phone', {
-      phone: true,
-    });
-
-
-   }
 
   customer : Customer = {
     id : 0,

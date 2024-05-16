@@ -4,7 +4,6 @@ import { faCalendarDays, faCoffee, faCreditCard, faHouse, faLock, faTriangleExcl
 
 
 import {FormsModule} from '@angular/forms';
-import {NgModule} from '@angular/core';
 
 import { TokenRequest } from '../models/TokenRequest';
 import { Card } from '../models/card';
@@ -16,24 +15,24 @@ import { CommonModule, NgFor, NgIf, UpperCasePipe } from '@angular/common';
 import {FormControl, FormGroup, ReactiveFormsModule} from '@angular/forms';
 import { Adress } from '../models/adress';
 import { NumbersValidatorsDirective } from '../validators/numbers-validators.directive';
-import { NgxCleaveDirectiveModule } from 'ngx-cleave-directive';
 
 import { Output, EventEmitter } from '@angular/core';
 import { CreditCardDirective } from '../credit-card.directive';
+import { RouterLink, RouterOutlet } from '@angular/router';
 
 declare let Cleave :any
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [ReactiveFormsModule,FontAwesomeModule, FormsModule
+  imports: 
+  [ReactiveFormsModule,FontAwesomeModule, FormsModule
     ,CommonModule,NgFor, NumbersValidatorsDirective,
-    CreditCardDirective,
-    NgIf,
-    NgxCleaveDirectiveModule],
+    CreditCardDirective,RouterOutlet,RouterLink,
+    NgIf],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
-export class CardComponent implements OnInit {
+export class CardComponent  {
   //icons 
 
   faCoffee = faCoffee;
@@ -44,6 +43,7 @@ export class CardComponent implements OnInit {
   faCalendarDays = faCalendarDays
   falock =  faLock
 
+  submitted =  false; 
 
   
   @Output() cardOutput  = new EventEmitter<Card>();
@@ -55,7 +55,8 @@ export class CardComponent implements OnInit {
   }
 
   sendCardToParent(value: Card) {
-    value.cardNumber = value.cardNumber.replace(/\s/g,'');
+    this.submitted = true;
+    value.cardNumber = value.cardNumber.replace(/\s/g, '');
     this.cardOutput.emit(value);
   }
 
@@ -117,11 +118,6 @@ export class CardComponent implements OnInit {
   }
 
 
-  ngOnInit(): void {
-    new Cleave('.cleave-credit', {
-      creditCard: true
-  });
-  }
 
   applyForm = new FormGroup({
     cardHolderName: new FormControl(''),

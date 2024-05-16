@@ -6,19 +6,23 @@ import { Customer } from '../models/customer';
 import { TokenRequest } from '../models/TokenRequest';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
 import { TokenFormService } from '../token-form.service';
-
+import { RouterLink, RouterOutlet } from '@angular/router';
+import { WelcomeComponent } from '../welcome/welcome.component';
 @Component({
   selector: 'app-form',
   standalone: true,
-  imports: [CardComponent,CustomerComponent, NgIf, NgClass,
-    CommonModule
+  imports: [CardComponent,CustomerComponent, WelcomeComponent,
+     NgIf, NgClass,
+    CommonModule, RouterOutlet,RouterOutlet
   ],
   templateUrl: './form.component.html',
   styleUrl: './form.component.css'
 })
 export class FormComponent {
   
-  isFirstPage : boolean = true;  
+
+  submitted = false;
+  isFirstPage : boolean = false;  
   TokenFormService = inject(TokenFormService);
 
   public changePage(){
@@ -48,6 +52,7 @@ export class FormComponent {
 
 
   async submitForm() {
+    this.submitted = true;
     let  response = await this.TokenFormService.submitTokenForm(this.token);
     console.log(response);
   }
