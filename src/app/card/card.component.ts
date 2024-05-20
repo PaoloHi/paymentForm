@@ -17,7 +17,7 @@ import { Adress } from '../models/adress';
 import { NumbersValidatorsDirective } from '../validators/numbers-validators.directive';
 
 import { Output, EventEmitter } from '@angular/core';
-import { CreditCardDirective } from '../credit-card.directive';
+import { CreditCardDirective } from '../validators/credit-card.directive';
 import { RouterLink, RouterOutlet } from '@angular/router';
 
 declare let Cleave :any

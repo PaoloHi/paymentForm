@@ -1,0 +1,26 @@
+
+.radioInput {
+    all:unset;
+    margin:0px;
+    appearance: radio;
+}
+
+
+@keyframes slideUpDown {
+    0% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px); /* Cambia la distancia de subida */
+    }
+    100% {
+      transform: translateY(0);
+    }
+  }
+  /* Aplicación de la animación al elemento */
+  .hand {
+    animation: slideUpDown 2s ease-in-out infinite; /* La animación dura 2 segundos, se repite infinitamente */
+  }
+
+
+

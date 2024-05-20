@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { AfterRenderPhase, Component, ElementRef, Injector, OnInit, ViewChild, afterNextRender, inject } from '@angular/core';
+import { ActivatedRoute, RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-welcome',
@@ -8,12 +8,11 @@ import { RouterModule } from '@angular/router';
   templateUrl: './welcome.component.html',
   styleUrl: './welcome.component.css'
 })
-export class WelcomeComponent implements OnInit {
+export class WelcomeComponent {
 
 
-  ngOnInit(): void {
-      
 
-  }
+
+
 
 }

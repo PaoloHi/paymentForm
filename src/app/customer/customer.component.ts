@@ -1,13 +1,13 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { AfterRenderPhase, Component, ElementRef, EventEmitter, Injector, OnInit, Output, ViewChild, afterNextRender, inject } from '@angular/core';
 import { Customer } from '../models/customer';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { faCity, faEnvelope, faPhone, faStreetView, faUser } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-import { PhoneDirective } from '../phone.directive';
+import { PhoneDirective } from '../validators/phone.directive';
 
 
-declare let Cleave: any;
+
 
 @Component({
   selector: 'app-customer',
@@ -32,6 +32,7 @@ export class CustomerComponent  {
   public sendCustomerToParent ( value: Customer){
       this.customerOutput.emit(value)
    }
+
 
 
   customer : Customer = {

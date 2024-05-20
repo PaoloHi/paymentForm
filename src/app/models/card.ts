@@ -5,6 +5,3 @@ export  interface Card {
     expirationMonth : string; 
     expirationYear : string;
 }   
-
-
-

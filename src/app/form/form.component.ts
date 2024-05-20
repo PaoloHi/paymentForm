@@ -5,9 +5,10 @@ import { CustomerComponent } from '../customer/customer.component';
 import { Customer } from '../models/customer';
 import { TokenRequest } from '../models/TokenRequest';
 import { CommonModule, NgClass, NgIf } from '@angular/common';
-import { TokenFormService } from '../token-form.service';
-import { RouterLink, RouterOutlet } from '@angular/router';
+import { TokenFormService } from '../seervices/token-form.service';
+import { RouterLink, RouterOutlet, Router } from '@angular/router';
 import { WelcomeComponent } from '../welcome/welcome.component';
+import { HttpResponse } from '../http-response';
 @Component({
   selector: 'app-form',
   standalone: true,
@@ -46,15 +47,18 @@ export class FormComponent {
     this.isFirstPage = !this.isFirstPage;    
     console.log(this.token.customer)
   }
-  constructor(){
-
+  constructor(private router : Router){
   }
 
 
   async submitForm() {
+
     this.submitted = true;
-    let  response = await this.TokenFormService.submitTokenForm(this.token);
-    console.log(response);
+    let  response: HttpResponse = await this.TokenFormService.submitTokenForm(this.token);
+    if(response.statusCode == 200){
+      this.router.navigate(['welcome']);
+    }
+
   }
 
 

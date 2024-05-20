@@ -6,8 +6,8 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 
 export const routes: Routes = [
 
-    { path: 'token/welcome', component: WelcomeComponent, title: 'Welcome Page'},  
-    { path :'wereable',  component: WereableComponent, title :'Wereable'},
+    { path: 'welcome', component: WelcomeComponent, title: 'Welcome Page'},  
+    { path :'wereable/:customerId',  component: WereableComponent, title :'Wereable'},
     { path : 'token', component: FormComponent, title: 'token'},
     {path: '**', component: PageNotFoundComponent}
 
